@@ -56,7 +56,7 @@ public class Appointment {
     }
 
     @Basic
-    @Column(name = "description", nullable = true, length = -1)
+    @Column(name = "description", nullable = true)
     public String getDescription() {
         return description;
     }
@@ -66,7 +66,7 @@ public class Appointment {
     }
 
     @Basic
-    @Column(name = "notes", nullable = true, length = -1)
+    @Column(name = "notes", nullable = true)
     public String getNotes() {
         return notes;
     }

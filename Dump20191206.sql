@@ -18,18 +18,18 @@
 --
 -- Table structure for table `appointment`
 --
-USE sample
 
 DROP TABLE IF EXISTS `appointment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `appointment` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `citizen_id` int(10) unsigned NOT NULL,
   `doctor_id` int(10) unsigned NOT NULL,
   `appointment_datetime` datetime NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `description` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `notes` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
   KEY `doc_app_idx` (`doctor_id`),
   KEY `cit_app_idx` (`citizen_id`),
   CONSTRAINT `cit_app` FOREIGN KEY (`citizen_id`) REFERENCES `citizen` (`id`),
@@ -56,8 +56,8 @@ DROP TABLE IF EXISTS `citizen`;
 CREATE TABLE `citizen` (
   `id` int(10) unsigned NOT NULL,
   `AMKA` int(11) unsigned NOT NULL,
-  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone_numner` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -84,8 +84,8 @@ DROP TABLE IF EXISTS `doctor`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `doctor` (
   `id` int(10) unsigned NOT NULL,
-  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `specialty_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_spec_idx` (`specialty_id`),
@@ -135,8 +135,8 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pwd` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pwd` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -160,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 19:54:35
+-- Dump completed on 2019-12-06 20:23:24

@@ -22,7 +22,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "username", nullable = false, length = 45)
+    @Column(name = "username", nullable = false, length = 32)
     public String getUsername() {
         return username;
     }
@@ -32,7 +32,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "pwd", nullable = false, length = 50)
+    @Column(name = "pwd", nullable = false, length = 32)
     public String getPwd() {
         return pwd;
     }
