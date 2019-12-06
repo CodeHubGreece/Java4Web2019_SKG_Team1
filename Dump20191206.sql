@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: sample
+-- Host: 127.0.0.1    Database: sample
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -18,25 +18,24 @@
 --
 -- Table structure for table `appointment`
 --
-use sample;
+USE sample
 
 DROP TABLE IF EXISTS `appointment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `appointment` (
-  `appointment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `AMKA` varchar(50) NOT NULL,
-  `doctor_id` int(11) unsigned NOT NULL,
-  `appointment_date` date NOT NULL,
-  `appointment_time` time NOT NULL,
-  `description` text NOT NULL,
-  `notes` text,
-  PRIMARY KEY (`appointment_id`),
-  KEY `fk_amka_idx` (`AMKA`),
-  KEY `fk_docid_idx` (`doctor_id`),
-  CONSTRAINT `fk_amka` FOREIGN KEY (`AMKA`) REFERENCES `citizen` (`AMKA`),
-  CONSTRAINT `fk_docid` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int(10) unsigned NOT NULL,
+  `AMKA` int(11) unsigned NOT NULL,
+  `doctor_id` int(10) unsigned NOT NULL,
+  `appointment_datetime` datetime NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `amka_app_idx` (`AMKA`),
+  KEY `doc_app_idx` (`doctor_id`),
+  CONSTRAINT `amka_app` FOREIGN KEY (`AMKA`) REFERENCES `citizen` (`AMKA`),
+  CONSTRAINT `doc_app` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,15 +55,16 @@ DROP TABLE IF EXISTS `citizen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `citizen` (
-  `AMKA` varchar(50) NOT NULL,
-  `first_name_cit` varchar(50) DEFAULT NULL,
-  `last_name_cit` varchar(50) DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL,
+  `AMKA` int(11) unsigned NOT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
-  `phone_numner` int(11) DEFAULT NULL,
-  `username` varchar(45) NOT NULL,
-  PRIMARY KEY (`AMKA`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `phone_numner` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `AMKA_UNIQUE` (`AMKA`),
+  CONSTRAINT `cit_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,16 +84,15 @@ DROP TABLE IF EXISTS `doctor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `doctor` (
-  `doctor_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `first_name_doc` varchar(50) DEFAULT NULL,
-  `last_name_doc` varchar(50) DEFAULT NULL,
-  `specialty` int(11) NOT NULL,
-  `username` varchar(45) NOT NULL,
-  PRIMARY KEY (`doctor_id`,`specialty`),
-  UNIQUE KEY `username_UNIQUE` (`username`),
-  KEY `fk_spec_idx` (`specialty`),
-  CONSTRAINT `fk_spec` FOREIGN KEY (`specialty`) REFERENCES `specialty` (`specialty_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int(10) unsigned NOT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `specialty_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_spec_idx` (`specialty_id`),
+  CONSTRAINT `doc_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`),
+  CONSTRAINT `fk_spec` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,10 +112,10 @@ DROP TABLE IF EXISTS `specialty`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `specialty` (
+  `id` int(10) unsigned NOT NULL,
   `specialty` varchar(50) NOT NULL,
-  `specialty_id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`specialty_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,14 +135,12 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `usernamme` varchar(50) NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
   `pwd` varchar(50) NOT NULL,
-  `user_type` varchar(45) NOT NULL,
-  PRIMARY KEY (`usernamme`),
-  UNIQUE KEY `usernamme_UNIQUE` (`usernamme`),
-  CONSTRAINT `cit` FOREIGN KEY (`usernamme`) REFERENCES `citizen` (`username`),
-  CONSTRAINT `doc` FOREIGN KEY (`usernamme`) REFERENCES `doctor` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 17:38:41
+-- Dump completed on 2019-12-06 16:45:45
