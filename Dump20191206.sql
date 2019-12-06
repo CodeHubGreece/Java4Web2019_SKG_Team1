@@ -25,15 +25,14 @@ DROP TABLE IF EXISTS `appointment`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `appointment` (
   `id` int(10) unsigned NOT NULL,
-  `AMKA` int(11) unsigned NOT NULL,
+  `citizen_id` int(10) unsigned NOT NULL,
   `doctor_id` int(10) unsigned NOT NULL,
   `appointment_datetime` datetime NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `amka_app_idx` (`AMKA`),
   KEY `doc_app_idx` (`doctor_id`),
-  CONSTRAINT `amka_app` FOREIGN KEY (`AMKA`) REFERENCES `citizen` (`AMKA`),
+  KEY `cit_app_idx` (`citizen_id`),
+  CONSTRAINT `cit_app` FOREIGN KEY (`citizen_id`) REFERENCES `citizen` (`id`),
   CONSTRAINT `doc_app` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -57,10 +56,10 @@ DROP TABLE IF EXISTS `citizen`;
 CREATE TABLE `citizen` (
   `id` int(10) unsigned NOT NULL,
   `AMKA` int(11) unsigned NOT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `email` varchar(50) NOT NULL,
-  `phone_numner` varchar(11) DEFAULT NULL,
+  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_numner` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `AMKA_UNIQUE` (`AMKA`),
   CONSTRAINT `cit_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
@@ -85,8 +84,8 @@ DROP TABLE IF EXISTS `doctor`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `doctor` (
   `id` int(10) unsigned NOT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
+  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `specialty_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_spec_idx` (`specialty_id`),
@@ -113,7 +112,7 @@ DROP TABLE IF EXISTS `specialty`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `specialty` (
   `id` int(10) unsigned NOT NULL,
-  `specialty` varchar(50) NOT NULL,
+  `specialty` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -136,8 +135,8 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `pwd` varchar(50) NOT NULL,
+  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pwd` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -161,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 16:45:45
+-- Dump completed on 2019-12-06 19:54:35
