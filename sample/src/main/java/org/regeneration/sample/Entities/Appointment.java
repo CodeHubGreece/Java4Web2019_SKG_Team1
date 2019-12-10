@@ -6,17 +6,33 @@ import java.util.Objects;
 
 @Entity
 public class Appointment {
-    private int id;
-    private int citizenId;
-    private int doctorId;
-    private Timestamp appointmentDatetime;
-    private String description;
-    private String notes;
-    private Citizen citizenByCitizenId;
-    private Doctor doctorByDoctorId;
-
     @Id
     @Column(name = "id", nullable = false)
+    private int id;
+
+    @Column(name = "citizen_id", nullable = false, insertable = false, updatable = false)
+    private int citizenId;
+
+    @Column(name = "doctor_id", nullable = false, insertable = false, updatable = false)
+    private int doctorId;
+
+    @Column(name = "datetime", nullable = false)
+    private Timestamp datetime;
+
+    @Column(name = "description", nullable = true, columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "notes", nullable = true, columnDefinition = "TEXT")
+    private String notes;
+
+    @ManyToOne
+    @JoinColumn(name = "citizen_id", referencedColumnName = "id", nullable = false)
+    private Citizen citizen;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
+    private Doctor doctor;
+
     public int getId() {
         return id;
     }
@@ -25,8 +41,6 @@ public class Appointment {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "citizen_id", nullable = false, insertable = false, updatable = false)
     public int getCitizenId() {
         return citizenId;
     }
@@ -35,8 +49,6 @@ public class Appointment {
         this.citizenId = citizenId;
     }
 
-    @Basic
-    @Column(name = "doctor_id", nullable = false, insertable = false, updatable = false)
     public int getDoctorId() {
         return doctorId;
     }
@@ -45,18 +57,14 @@ public class Appointment {
         this.doctorId = doctorId;
     }
 
-    @Basic
-    @Column(name = "appointment_datetime", nullable = false)
-    public Timestamp getAppointmentDatetime() {
-        return appointmentDatetime;
+    public Timestamp getDatetime() {
+        return datetime;
     }
 
-    public void setAppointmentDatetime(Timestamp appointmentDatetime) {
-        this.appointmentDatetime = appointmentDatetime;
+    public void setDatetime(Timestamp datetime) {
+        this.datetime = datetime;
     }
 
-    @Basic
-    @Column(name = "description", nullable = true)
     public String getDescription() {
         return description;
     }
@@ -65,8 +73,6 @@ public class Appointment {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "notes", nullable = true)
     public String getNotes() {
         return notes;
     }
@@ -83,33 +89,29 @@ public class Appointment {
         return id == that.id &&
                 citizenId == that.citizenId &&
                 doctorId == that.doctorId &&
-                Objects.equals(appointmentDatetime, that.appointmentDatetime) &&
+                Objects.equals(datetime, that.datetime) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(notes, that.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, citizenId, doctorId, appointmentDatetime, description, notes);
+        return Objects.hash(id, citizenId, doctorId, datetime, description, notes);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "citizen_id", referencedColumnName = "id", nullable = false)
-    public Citizen getCitizenByCitizenId() {
-        return citizenByCitizenId;
+    public Citizen getCitizen() {
+        return citizen;
     }
 
-    public void setCitizenByCitizenId(Citizen citizenByCitizenId) {
-        this.citizenByCitizenId = citizenByCitizenId;
+    public void setCitizenByCitizenId(Citizen citizen) {
+        this.citizen = citizen;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
     public Doctor getDoctorByDoctorId() {
-        return doctorByDoctorId;
+        return doctor;
     }
 
-    public void setDoctorByDoctorId(Doctor doctorByDoctorId) {
-        this.doctorByDoctorId = doctorByDoctorId;
+    public void setDoctorByDoctorId(Doctor doctor) {
+        this.doctor = doctor;
     }
 }

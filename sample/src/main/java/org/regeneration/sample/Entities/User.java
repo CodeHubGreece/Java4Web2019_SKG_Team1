@@ -1,18 +1,42 @@
 package org.regeneration.sample.Entities;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class User {
-    private int id;
-    private String username;
-    private String pwd;
-    private Citizen citizenById;
-    private Doctor doctorById;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(name = "type", nullable = false, columnDefinition = "CHAR(1)")
+    private String type;
+
+    @Column(name = "username", nullable = false, length = 32, unique = true)
+    private String username;
+
+    @Column(name = "pwd", nullable = false, length = 32)
+    private String password;
+
+    @OneToOne(mappedBy = "user")
+    private Citizen citizen;
+
+    @OneToOne(mappedBy = "user")
+    private Doctor doctor;
+
+    public User() {
+    }
+
+    public User(String type, String username, String pwd) {
+        this.type=type;
+        this.username=username;
+        this.password=pwd;
+    }
+
     public int getId() {
         return id;
     }
@@ -21,8 +45,15 @@ public class User {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "username", nullable = false, length = 32)
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
     public String getUsername() {
         return username;
     }
@@ -31,14 +62,28 @@ public class User {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "pwd", nullable = false, length = 32)
     public String getPwd() {
-        return pwd;
+        return password;
     }
 
     public void setPwd(String pwd) {
-        this.pwd = pwd;
+        this.password = pwd;
+    }
+
+    public Citizen getCitizen() {
+        return citizen;
+    }
+
+    public void setCitizen(Citizen citizen) {
+        this.citizen = citizen;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     @Override
@@ -47,30 +92,13 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
+                Objects.equals(type, user.type) &&
                 Objects.equals(username, user.username) &&
-                Objects.equals(pwd, user.pwd);
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, pwd);
-    }
-
-    @OneToOne(mappedBy = "userById")
-    public Citizen getCitizenById() {
-        return citizenById;
-    }
-
-    public void setCitizenById(Citizen citizenById) {
-        this.citizenById = citizenById;
-    }
-
-    @OneToOne(mappedBy = "userById")
-    public Doctor getDoctorById() {
-        return doctorById;
-    }
-
-    public void setDoctorById(Doctor doctorById) {
-        this.doctorById = doctorById;
+        return Objects.hash(id, type, username, password);
     }
 }
