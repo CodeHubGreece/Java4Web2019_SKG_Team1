@@ -36,11 +36,11 @@ public class CitizenController {
     public Citizen getCitizen(@PathVariable int id) {
         return citizenService.getById(id);
     }
-
-    @PostMapping("/registration")
-    public Citizen createNewCitizen(@RequestBody Citizen citizen){
-        return citizenService.saveOneCit(citizen);
-    }
+//
+//    @PostMapping("/registration")
+//    public Citizen createNewCitizen(@RequestBody Citizen citizen){
+//        return citizenService.saveOneCit(citizen);
+//    }
 
 
 }

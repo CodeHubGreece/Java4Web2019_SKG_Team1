@@ -9,7 +9,7 @@ public class Appointment {
     private int id;
     private Long citizenId;
     private int doctorId;
-    private Timestamp appointmentDatetime;
+    private Timestamp datetime;
     private String description;
     private String notes;
     private Citizen citizenByCitizenId;
@@ -46,13 +46,13 @@ public class Appointment {
     }
 
     @Basic
-    @Column(name = "appointment_datetime", nullable = false)
+    @Column(name = "datetime", nullable = false)
     public Timestamp getAppointmentDatetime() {
-        return appointmentDatetime;
+        return datetime;
     }
 
     public void setAppointmentDatetime(Timestamp appointmentDatetime) {
-        this.appointmentDatetime = appointmentDatetime;
+        this.datetime = appointmentDatetime;
     }
 
     @Basic
@@ -83,14 +83,14 @@ public class Appointment {
         return id == that.id &&
                 citizenId == that.citizenId &&
                 doctorId == that.doctorId &&
-                Objects.equals(appointmentDatetime, that.appointmentDatetime) &&
+                Objects.equals(datetime, that.datetime) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(notes, that.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, citizenId, doctorId, appointmentDatetime, description, notes);
+        return Objects.hash(id, citizenId, doctorId, datetime, description, notes);
     }
 
     @ManyToOne

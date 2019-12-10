@@ -8,7 +8,7 @@ import java.util.List;
 public interface CitizenRepository extends JpaRepository<Citizen,Long> {
 
 
-    Citizen getById(Long id);
+   // Citizen getById(Long id);
 
     @Override
      List<Citizen> findAll();

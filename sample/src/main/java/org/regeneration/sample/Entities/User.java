@@ -13,6 +13,7 @@ public class User {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment
     public Long getId() {
         return id;
     }
@@ -41,6 +42,7 @@ public class User {
         this.pwd = pwd;
     }
 
+    //nice to have
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
