@@ -6,22 +6,35 @@ import java.util.Objects;
 
 @Entity
 public class Citizen {
-    private int id;
+    private Long id;
     private int amka;
     private String firstName;
     private String lastName;
     private String email;
-    private String phoneNumner;
+    private String phoneNumber;
     private Collection<Appointment> appointmentsById;
     private User userById;
 
+    public Citizen(){
+
+    }
+
+    public Citizen(int amka, String firstName, String lastName, String email, String phoneNumber){
+        this.amka = amka;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,13 +79,13 @@ public class Citizen {
     }
 
     @Basic
-    @Column(name = "phone_numner", nullable = true, length = 11)
+    @Column(name = "phone_number", nullable = true, length = 11)
     public String getPhoneNumner() {
-        return phoneNumner;
+        return phoneNumber;
     }
 
     public void setPhoneNumner(String phoneNumner) {
-        this.phoneNumner = phoneNumner;
+        this.phoneNumber = phoneNumner;
     }
 
     @Override
@@ -85,12 +98,12 @@ public class Citizen {
                 Objects.equals(firstName, citizen.firstName) &&
                 Objects.equals(lastName, citizen.lastName) &&
                 Objects.equals(email, citizen.email) &&
-                Objects.equals(phoneNumner, citizen.phoneNumner);
+                Objects.equals(phoneNumber, citizen.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amka, firstName, lastName, email, phoneNumner);
+        return Objects.hash(id, amka, firstName, lastName, email, phoneNumber);
     }
 
     @OneToMany(mappedBy = "citizenByCitizenId")

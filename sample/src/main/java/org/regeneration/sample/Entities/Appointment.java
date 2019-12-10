@@ -7,7 +7,7 @@ import java.util.Objects;
 @Entity
 public class Appointment {
     private int id;
-    private int citizenId;
+    private Long citizenId;
     private int doctorId;
     private Timestamp appointmentDatetime;
     private String description;
@@ -27,11 +27,11 @@ public class Appointment {
 
     @Basic
     @Column(name = "citizen_id", nullable = false, insertable = false, updatable = false)
-    public int getCitizenId() {
+    public Long getCitizenId() {
         return citizenId;
     }
 
-    public void setCitizenId(int citizenId) {
+    public void setCitizenId(Long citizenId) {
         this.citizenId = citizenId;
     }
 
