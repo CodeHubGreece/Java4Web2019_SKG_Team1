@@ -1,17 +1,34 @@
 package org.regeneration.sample.Entities;
 
 import javax.persistence.*;
+import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Specialty {
-    private int id;
-    private String specialty;
-    private Collection<Doctor> doctorsById;
-
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(name = "specialty", nullable = false, length = 50)
+    private String specialty;
+
+    @OneToMany(mappedBy = "specialty")
+    private Collection<Doctor> doctors;
+
+    public Specialty() {
+    }
+
+
+    public Specialty(String specialty) {
+        this.specialty=specialty;
+        doctors = new ArrayList<>();
+    }
+
+
     public int getId() {
         return id;
     }
@@ -20,8 +37,6 @@ public class Specialty {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "specialty", nullable = false, length = 50)
     public String getSpecialty() {
         return specialty;
     }
@@ -29,6 +44,15 @@ public class Specialty {
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
+
+    public Collection<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(Collection<Doctor> doctors) {
+        this.doctors = doctors;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -44,12 +68,6 @@ public class Specialty {
         return Objects.hash(id, specialty);
     }
 
-    @OneToMany(mappedBy = "specialtyBySpecialtyId")
-    public Collection<Doctor> getDoctorsById() {
-        return doctorsById;
-    }
 
-    public void setDoctorsById(Collection<Doctor> doctorsById) {
-        this.doctorsById = doctorsById;
-    }
+
 }

@@ -1,22 +1,57 @@
 package org.regeneration.sample.Entities;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 
 @Entity
 public class Citizen {
-    private int id;
-    private int amka;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumner;
-    private Collection<Appointment> appointmentsById;
-    private User userById;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(name = "user_id", nullable = false, insertable = false, updatable = false)
+    private int userId;
+
+    @Column(name = "amka", nullable = false, unique = true)
+    private int amka;
+
+    @Column(name = "first_name", length = 32)
+    private String firstName;
+
+    @Column(name = "last_name", length = 32)
+    private String lastName;
+
+    @Column(name = "email", nullable = false, length = 50)
+    private String email;
+
+    @Column(name = "phone_number", length = 11)
+    private String phoneNumber;
+
+    @OneToMany(mappedBy = "citizen")
+    private Collection<Appointment> appointments;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
+
+    public Citizen() {
+    }
+
+    public Citizen(User user, int amka, String firstName, String lastName, String email, String phoneNumber) {
+        this.user = user;
+        this.amka = amka;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+
     public int getId() {
         return id;
     }
@@ -25,8 +60,14 @@ public class Citizen {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "AMKA", nullable = false)
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public int getAmka() {
         return amka;
     }
@@ -35,8 +76,6 @@ public class Citizen {
         this.amka = amka;
     }
 
-    @Basic
-    @Column(name = "first_name", nullable = true, length = 32)
     public String getFirstName() {
         return firstName;
     }
@@ -45,8 +84,6 @@ public class Citizen {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "last_name", nullable = true, length = 32)
     public String getLastName() {
         return lastName;
     }
@@ -55,8 +92,6 @@ public class Citizen {
         this.lastName = lastName;
     }
 
-    @Basic
-    @Column(name = "email", nullable = false, length = 50)
     public String getEmail() {
         return email;
     }
@@ -65,14 +100,28 @@ public class Citizen {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "phone_numner", nullable = true, length = 11)
-    public String getPhoneNumner() {
-        return phoneNumner;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNumner(String phoneNumner) {
-        this.phoneNumner = phoneNumner;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Collection<Appointment> getAppointmentsById() {
+        return appointments;
+    }
+
+    public void setAppointmentsById(Collection<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -81,34 +130,17 @@ public class Citizen {
         if (o == null || getClass() != o.getClass()) return false;
         Citizen citizen = (Citizen) o;
         return id == citizen.id &&
+                userId == citizen.userId &&
                 amka == citizen.amka &&
                 Objects.equals(firstName, citizen.firstName) &&
                 Objects.equals(lastName, citizen.lastName) &&
                 Objects.equals(email, citizen.email) &&
-                Objects.equals(phoneNumner, citizen.phoneNumner);
+                Objects.equals(phoneNumber, citizen.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amka, firstName, lastName, email, phoneNumner);
+        return Objects.hash(id, userId, amka, firstName, lastName, email, phoneNumber);
     }
 
-    @OneToMany(mappedBy = "citizenByCitizenId")
-    public Collection<Appointment> getAppointmentsById() {
-        return appointmentsById;
-    }
-
-    public void setAppointmentsById(Collection<Appointment> appointmentsById) {
-        this.appointmentsById = appointmentsById;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
-    public User getUserById() {
-        return userById;
-    }
-
-    public void setUserById(User userById) {
-        this.userById = userById;
-    }
 }

@@ -1,21 +1,52 @@
 package org.regeneration.sample.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Doctor {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private int specialtyId;
-    private Collection<Appointment> appointmentsById;
-    private User userById;
-    private Specialty specialtyBySpecialtyId;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(name = "user_id", nullable = false, insertable = false, updatable = false)
+    private int userId;
+
+    @Column(name = "first_name", length = 32)
+    private String firstName;
+
+    @Column(name = "last_name", length = 32)
+    private String lastName;
+
+    @OneToMany(mappedBy = "doctor")
+    private Collection<Appointment> appointments;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
+
+    @Column(name = "specialty_id", nullable = false, insertable = false, updatable = false)
+    private int specialityId;
+
+    @ManyToOne
+    @JoinColumn(name = "specialty_id", referencedColumnName = "id", nullable = false)
+    private Specialty specialty;
+
+    public Doctor() {
+    }
+
+    public Doctor(User user, String firstName, String lastName, Specialty specialty) {
+        this.user = user;
+        this.userId=user.getId();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.specialty = specialty;
+    }
+
+
     public int getId() {
         return id;
     }
@@ -24,8 +55,16 @@ public class Doctor {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "first_name", nullable = true, length = 32)
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -34,8 +73,7 @@ public class Doctor {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "last_name", nullable = true, length = 32)
+
     public String getLastName() {
         return lastName;
     }
@@ -44,14 +82,12 @@ public class Doctor {
         this.lastName = lastName;
     }
 
-    @Basic
-    @Column(name = "specialty_id", nullable = false, insertable = false, updatable = false)
     public int getSpecialtyId() {
-        return specialtyId;
+        return specialityId;
     }
 
     public void setSpecialtyId(int specialtyId) {
-        this.specialtyId = specialtyId;
+        this.specialityId = specialityId;
     }
 
     @Override
@@ -60,42 +96,40 @@ public class Doctor {
         if (o == null || getClass() != o.getClass()) return false;
         Doctor doctor = (Doctor) o;
         return id == doctor.id &&
-                specialtyId == doctor.specialtyId &&
+                userId == doctor.userId &&
                 Objects.equals(firstName, doctor.firstName) &&
                 Objects.equals(lastName, doctor.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, specialtyId);
+        return Objects.hash(id, userId, firstName, lastName);
     }
 
-    @OneToMany(mappedBy = "doctorByDoctorId")
     public Collection<Appointment> getAppointmentsById() {
-        return appointmentsById;
+        return appointments;
     }
 
-    public void setAppointmentsById(Collection<Appointment> appointmentsById) {
-        this.appointmentsById = appointmentsById;
+    public void setAppointmentsById(Collection<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
-    @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
-    public User getUserById() {
-        return userById;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserById(User userById) {
-        this.userById = userById;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "specialty_id", referencedColumnName = "id", nullable = false)
-    public Specialty getSpecialtyBySpecialtyId() {
-        return specialtyBySpecialtyId;
+
+    public Specialty getSpecialty() {
+        return specialty;
     }
 
-    public void setSpecialtyBySpecialtyId(Specialty specialtyBySpecialtyId) {
-        this.specialtyBySpecialtyId = specialtyBySpecialtyId;
+    public void setSpecialty(Specialty specialty) {
+        this.specialty.getDoctors().remove(this);
+        this.specialty = specialty;
+        this.specialty.getDoctors().add(this);
     }
 }
