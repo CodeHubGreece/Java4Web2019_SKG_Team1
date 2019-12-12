@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Appointment {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "citizen_id", nullable = false, insertable = false, updatable = false)

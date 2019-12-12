@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Citizen {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "user_id", nullable = false, insertable = false, updatable = false)
@@ -39,12 +39,11 @@ public class Citizen {
     @OneToMany(mappedBy = "citizen")
     private Collection<Appointment> appointments;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id",referencedColumnName = "id", nullable = false)
     private User user;
 
-    public Citizen(User user, int amka, String firstName, String lastName, String email, String phoneNumber) {
-        this.user = user;
+    public Citizen(int amka, String firstName, String lastName, String email, String phoneNumber) {
         this.amka = amka;
         this.firstName = firstName;
         this.lastName = lastName;

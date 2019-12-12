@@ -1,12 +1,13 @@
 package org.regeneration.rest.restless.controller;
 
+import org.regeneration.rest.restless.RegistrationData;
+import org.regeneration.rest.restless.entity.Citizen;
 import org.regeneration.rest.restless.entity.Doctor;
 import org.regeneration.rest.restless.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NameAlreadyBoundException;
 import java.util.List;
 
 @RestController
@@ -29,9 +30,8 @@ public class DoctorController {
     }
 
     @GetMapping("/doctor/{specialty}")
-    public List<Doctor> findAllBySpecialityId(@PathVariable int specialtyId, @PathVariable String specialty){
+    public List<Doctor> findAllBySpecialityId(@PathVariable int specialtyId, @PathVariable String specialty) {
         return doctorService.findAllBySpecialityId(specialtyId);
     }
-
 }
 

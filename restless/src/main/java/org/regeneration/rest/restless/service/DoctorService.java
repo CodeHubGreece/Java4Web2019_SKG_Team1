@@ -18,8 +18,6 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
     }
 
-
-
     public Doctor findById(int id){
         return doctorRepository.findById(id);
     }

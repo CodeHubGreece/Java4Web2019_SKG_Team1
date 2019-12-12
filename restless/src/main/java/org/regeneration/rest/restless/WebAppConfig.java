@@ -57,12 +57,12 @@ public class WebAppConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
-//        auth.inMemoryAuthentication()
-//                .withUser("user1").password(passwordEncoder().encode("user1")).roles("USER")
-//                .and()
-//                .withUser("user2").password(passwordEncoder().encode("user2")).roles("USER")
-//                .and()
-//                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
+       /* auth.inMemoryAuthentication()
+                .withUser("user1").password(passwordEncoder().encode("user1")).roles("USER")
+                .and()
+                .withUser("user2").password(passwordEncoder().encode("user2")).roles("USER")
+                .and()
+                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");*/
     }
 
     @Override
@@ -72,18 +72,18 @@ public class WebAppConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler)
-                .authenticationEntryPoint(authenticationEntryPoint)
-                .and()
-                .authorizeRequests()
-                .antMatchers("/books").authenticated()
-                .antMatchers("/books/**").authenticated()
+//                .accessDeniedHandler(accessDeniedHandler)
+//                .authenticationEntryPoint(authenticationEntryPoint)
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/login").permitAll()
                 .and()
                 .formLogin()
                 .successHandler(apiSuccessHandler)
                 .failureHandler(new SimpleUrlAuthenticationFailureHandler())
                 .and()
                 .logout()
+                .permitAll()
                 .logoutSuccessUrl("/login.html");
     }
 

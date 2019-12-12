@@ -1,5 +1,7 @@
 package org.regeneration.rest.restless.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -7,7 +9,7 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "type", nullable = false, columnDefinition = "CHAR(1)")
@@ -19,12 +21,12 @@ public class User {
     @Column(name = "pwd", nullable = false, length = 32)
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "user_id")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Citizen citizen;
 
-    @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "user_id")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Doctor doctor;
 
     public User() {

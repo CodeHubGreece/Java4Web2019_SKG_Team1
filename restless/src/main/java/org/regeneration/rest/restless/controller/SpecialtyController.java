@@ -18,8 +18,8 @@ public class SpecialtyController {
         this.specialtyService = specialtyService;
     }
 
-    @GetMapping("/specialty/")
-    public List<Specialty> getSpecialty() {
+    @GetMapping("/specialty")
+    public List<Specialty> findAll() {
         return specialtyService.findAll();
     }
 

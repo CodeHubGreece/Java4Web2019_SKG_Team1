@@ -40,5 +40,4 @@ public class ApiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
         clearAuthenticationAttributes(request);
     }
 
-
 }

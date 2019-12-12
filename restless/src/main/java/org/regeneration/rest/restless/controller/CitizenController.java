@@ -1,16 +1,16 @@
 package org.regeneration.rest.restless.controller;
 
 
-import lombok.Data;
-import org.regeneration.rest.restless.Registration;
+import org.regeneration.rest.restless.RegistrationData;
 import org.regeneration.rest.restless.entity.Citizen;
 import org.regeneration.rest.restless.repository.CitizenRepository;
 import org.regeneration.rest.restless.service.CitizenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NameAlreadyBoundException;
 import java.util.List;
-@Data
+
 @RestController
 public class CitizenController {
 
@@ -32,8 +32,13 @@ public class CitizenController {
 	}
 
 	@PostMapping("/citizen/registration")
-	public Citizen registerCitizen(@RequestBody Registration registration){
-		return citizenService.register(registration);
+	public Citizen registerCitizen(@RequestBody RegistrationData registrationData){
+		try {
+			return citizenService.register(registrationData);
+		} catch (NameAlreadyBoundException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 
 }

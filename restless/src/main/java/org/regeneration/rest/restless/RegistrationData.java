@@ -3,10 +3,13 @@ package org.regeneration.rest.restless;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
-public class Registration {
+@Component
+public class RegistrationData {
     private String username;
     private String password;
     private String first_name;

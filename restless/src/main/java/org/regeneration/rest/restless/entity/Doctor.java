@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Doctor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "user_id", nullable = false, insertable = false, updatable = false)
@@ -23,8 +23,8 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private Collection<Appointment> appointments;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id",referencedColumnName = "id", nullable = false)
     private User user;
 
     @Column(name = "specialty_id", nullable = false, insertable = false, updatable = false)
@@ -37,8 +37,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(User user, String firstName, String lastName, Specialty specialty) {
-        this.user = user;
+    public Doctor(String firstName, String lastName, Specialty specialty) {
         this.userId=user.getId();
         this.firstName = firstName;
         this.lastName = lastName;
