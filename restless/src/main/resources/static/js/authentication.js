@@ -1,4 +1,3 @@
-ROOT_PATH = "localhost:8080"
 function login(usernameElement, passwordElement) {
     let username = usernameElement && usernameElement.value ? usernameElement.value : "";
     let password = passwordElement && passwordElement.value ? passwordElement.value : "";
