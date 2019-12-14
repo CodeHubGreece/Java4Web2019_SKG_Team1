@@ -23,8 +23,11 @@ public class UserController {
         return userService.findById(Integer.parseInt(id));
     }
 
-    /*@PostMapping("/login")
-    public User login(@RequestBody User user){
-        return userService.findByUsername(user.getUsername());
-    }*/
+    @GetMapping("/user/checkUsername")
+    public String checkIfUserExists(@RequestParam String username) {
+        User user = userService.findByUsername(username);
+        if(user == null) return "not taken";
+        else return "taken";
+
+    }
 }

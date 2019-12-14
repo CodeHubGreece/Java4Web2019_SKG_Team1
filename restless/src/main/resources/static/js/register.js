@@ -10,23 +10,6 @@ function register(){
     let email = document.getElementById('email').value;
     let amka = document.getElementById('amka').value;
     let number = document.getElementById('number').value;
-    console.log(username);
-    console.log(password);
-    console.log(firstName);
-    console.log(email);
-    console.log(amka);
-    console.log(number);
-    console.log(lastName);
-
-
-        // let fd = new FormData();
-        // fd.append('username', username);
-        // fd.append('password', password);
-        // fd.append('firstName', firstName);
-        // fd.append('lastName', lastName);
-        // fd.append('email', email);
-        // fd.append('amka', amka);
-        // fd.append('number', number);
 
        
                $.ajax({

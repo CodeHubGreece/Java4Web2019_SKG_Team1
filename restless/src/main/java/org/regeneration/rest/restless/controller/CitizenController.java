@@ -31,7 +31,7 @@ public class CitizenController {
 		return citizenService.findByAmka(Integer.parseInt(amka));
 	}
 
-	@PostMapping("/citizen/registration")
+	@PostMapping(value  = "/citizen/registration")
 	public Citizen registerCitizen(@RequestBody RegistrationData registrationData){
 		try {
 			return citizenService.register(registrationData);

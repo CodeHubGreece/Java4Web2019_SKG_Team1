@@ -1,10 +1,17 @@
 package org.regeneration.rest.restless.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Appointment {
     @Id
     @Column(name = "id", nullable = false)
@@ -34,53 +41,16 @@ public class Appointment {
     @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
     private Doctor doctor;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
+    public Appointment(int id, int citizenId, int doctorId, Timestamp datetime, String description, String notes) {
         this.id = id;
-    }
-
-    public int getCitizenId() {
-        return citizenId;
-    }
-
-    public void setCitizenId(int citizenId) {
         this.citizenId = citizenId;
-    }
-
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
-    }
-
-    public Timestamp getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Timestamp datetime) {
         this.datetime = datetime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
         this.notes = notes;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -100,19 +70,4 @@ public class Appointment {
         return Objects.hash(id, citizenId, doctorId, datetime, description, notes);
     }
 
-    public Citizen getCitizen() {
-        return citizen;
-    }
-
-    public void setCitizenByCitizenId(Citizen citizen) {
-        this.citizen = citizen;
-    }
-
-    public Doctor getDoctorByDoctorId() {
-        return doctor;
-    }
-
-    public void setDoctorByDoctorId(Doctor doctor) {
-        this.doctor = doctor;
-    }
 }

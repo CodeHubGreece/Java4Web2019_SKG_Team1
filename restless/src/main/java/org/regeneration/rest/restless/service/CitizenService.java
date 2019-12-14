@@ -43,8 +43,8 @@ public class CitizenService {
     }
 
     public Citizen register(RegistrationData registrationData) throws NameAlreadyBoundException {
-        if (userRepository.existsByUsername(registrationData.getUsername())) {
-            User newUser = new User("c", registrationData.getUsername(), passwordEncoder.encode(registrationData.getPassword()));
+     //   if (userRepository.existsByUsername(registrationData.getUsername())) {
+            User newUser = new User("c", registrationData.getUsername(), registrationData.getPassword());//passwordEncoder.encode(registrationData.getPassword()));
             Citizen newCitizen = new Citizen(
                     registrationData.getAmka(),
                     registrationData.getFirst_name(),
@@ -59,8 +59,9 @@ public class CitizenService {
             userRepository.save(newUser);
 
             return citizenRepository.findById(newCitizen.getId());
-        }else{
-            throw new NameAlreadyBoundException("Username already exists!");
         }
-    }
+     //   else{
+        //  throw new NameAlreadyBoundException("Username already exists!");
+    //   }
+ //   }
 }

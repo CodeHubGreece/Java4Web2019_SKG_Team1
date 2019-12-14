@@ -38,7 +38,7 @@ $('#amka').on('blur', function(){
   }
   $.ajax({
     url:  ROOT_PATH + '/user/checkUsername',
-    type: 'post',
+    type: 'get',
     data: {  'username' : username, },
     success: function(response){
       if (response == 'taken' )changeDOM("username","username is taken",lightishRed);
