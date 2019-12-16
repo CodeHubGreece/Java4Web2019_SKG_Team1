@@ -6,8 +6,10 @@ import org.regeneration.efka.repository.UserRepository;
 import org.regeneration.efka.RegistrationData;
 import org.regeneration.efka.repository.CitizenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -31,7 +33,7 @@ public class CitizenService {
         return citizenRepository.findById(id);
     }
 
-    public Citizen findByAmka(int amka) {
+    public Citizen findByAmka(Long amka) {
         return citizenRepository.findByAmka(amka);
     }
 
@@ -59,7 +61,7 @@ public class CitizenService {
 
             return citizenRepository.findById(newCitizen.getId());
         } else {
-            throw new InputMismatchException("User already exists!");
+            throw new ResponseStatusException(HttpStatus.CONFLICT,"User already exists");
         }
     }
 }

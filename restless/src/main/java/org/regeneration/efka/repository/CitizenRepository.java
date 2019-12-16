@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CitizenRepository extends JpaRepository<Citizen, Integer> {
-    Citizen findByAmka(int amka);
+    Citizen findByAmka(Long amka);
     Citizen findById(int id);
-    boolean existsByAmka(int amka);
+    boolean existsByAmka(Long amka);
 }

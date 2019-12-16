@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Component
 @Getter
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class NewAppointmentData {
     private int citizenId;
     private int doctorId;
-    private Timestamp datetime;
+    private Date datetime;
     private String description;
     private String notes;
 }

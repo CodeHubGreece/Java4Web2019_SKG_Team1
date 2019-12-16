@@ -24,7 +24,7 @@ public class Citizen {
     private int userId;
 
     @Column(name = "amka", nullable = false, unique = true)
-    private int amka;
+    private Long amka;
 
     @Column(name = "first_name", length = 32)
     private String firstName;
@@ -46,7 +46,7 @@ public class Citizen {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    public Citizen(int amka, String firstName, String lastName, String email, String phoneNumber) {
+    public Citizen(Long amka, String firstName, String lastName, String email, String phoneNumber) {
         this.amka = amka;
         this.firstName = firstName;
         this.lastName = lastName;

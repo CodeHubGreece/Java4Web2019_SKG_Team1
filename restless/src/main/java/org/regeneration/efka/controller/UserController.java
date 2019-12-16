@@ -26,4 +26,9 @@ public class UserController {
     public User findByUsername(Principal loggedInUser){
         return userService.findByUsername(loggedInUser.getName());
     }
+
+    @GetMapping("/user/checkUsername")
+    public boolean checkUsername(@RequestParam String username){
+        return userService.checkUsername(username);
+    }
 }

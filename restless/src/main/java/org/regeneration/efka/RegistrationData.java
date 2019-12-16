@@ -15,7 +15,7 @@ public class RegistrationData {
     private String last_name;
     private String phone_num;
     private String email;
-    private int amka;
+    private Long amka;
 }
 /*{
     "username": "",

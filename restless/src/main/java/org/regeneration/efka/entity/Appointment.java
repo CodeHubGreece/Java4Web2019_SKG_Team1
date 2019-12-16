@@ -1,11 +1,13 @@
 package org.regeneration.efka.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -24,9 +26,9 @@ public class Appointment {
     @Column(name = "doctor_id", nullable = false, insertable = false, updatable = false)
     private int doctorId;
 
-    @Column(name = "datetime", nullable = false)
+    @Column(name = "datetime", nullable = false, columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp datetime;
+    private Date datetime;
 
     @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
@@ -36,10 +38,12 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "citizen_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Citizen citizen;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Doctor doctor;
 
 

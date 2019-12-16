@@ -1,7 +1,7 @@
 package org.regeneration.efka.service;
 
-import org.regeneration.efka.repository.UserRepository;
 import org.regeneration.efka.entity.User;
+import org.regeneration.efka.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
@@ -27,5 +27,9 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public boolean checkUsername(String username) {
+        return userRepository.existsByUsername(username);
     }
 }

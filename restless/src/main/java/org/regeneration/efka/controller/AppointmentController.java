@@ -15,12 +15,10 @@ public class AppointmentController {
 
 
     private final AppointmentService appointmentService;
-    private final CitizenService citizenService;
 
     @Autowired
     public AppointmentController(AppointmentService appointmentService, CitizenService citizenService) {
         this.appointmentService = appointmentService;
-        this.citizenService = citizenService;
     }
 
 
@@ -46,13 +44,14 @@ public class AppointmentController {
         return appointmentService.findAppointmentsByDoctor(doctor.getAppointmentsById());
     }*/
 
-    @GetMapping("/appointment/dates-doctor")
-    public List<Appointment> findAllByDatetimeBetweenAndDoctorId(@RequestParam(name = "fromDate") String fromDateString,
-                                                                 @RequestParam(name = "toDate") String toDateString,
-                                                                 @RequestParam(name = "doctorId") int doctorId) {
+    @GetMapping("/appointment/dates-specialty")
+    public List<Appointment> findAllByDatetimeBetweenAndSpecialtyId(@RequestParam(name = "citizenId") int citizenId,
+                                                                    @RequestParam(name = "fromDate") String fromDateString,
+                                                                    @RequestParam(name = "toDate") String toDateString,
+                                                                    @RequestParam(name = "specialtyId") int specialtyId) {
         Timestamp fromDate = Timestamp.valueOf(fromDateString);
         Timestamp toDate = Timestamp.valueOf(toDateString);
-        return appointmentService.findAllByDatetimeBetweenAndDoctorId(fromDate, toDate, doctorId);
+        return appointmentService.findAllByDatetimeBetweenAndSpecialtyId(citizenId, fromDate, toDate, specialtyId);
 
     }
 
