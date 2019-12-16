@@ -46,4 +46,9 @@ $('#amka').on('blur', function(){
     }
   });
  });		
+<<<<<<< Updated upstream
  });
+=======
+
+ });
+>>>>>>> Stashed changes

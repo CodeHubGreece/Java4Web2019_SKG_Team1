@@ -13,7 +13,11 @@ function register(){
 
        
                $.ajax({
+<<<<<<< Updated upstream
                         url: ROOT_PATH + '/citizen/registration',
+=======
+                        url: ROOT_PATH + '/citizen/register',
+>>>>>>> Stashed changes
                         type: 'POST',
                          dataType: 'json',
                          data: JSON.stringify({

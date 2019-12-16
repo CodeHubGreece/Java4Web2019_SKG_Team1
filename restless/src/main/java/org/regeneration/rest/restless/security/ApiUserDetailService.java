@@ -2,8 +2,13 @@ package org.regeneration.rest.restless.security;
 
 
 
+<<<<<<< Updated upstream:restless/src/main/java/org/regeneration/rest/restless/security/ApiUserDetailService.java
 import org.regeneration.rest.restless.entity.User;
 import org.regeneration.rest.restless.repository.UserRepository;
+=======
+import org.regeneration.efka.repository.UserRepository;
+import org.regeneration.efka.entity.User;
+>>>>>>> Stashed changes:restless/src/main/java/org/regeneration/efka/security/ApiUserDetailService.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -11,5 +11,9 @@ import java.util.List;
 public interface CitizenRepository extends JpaRepository<Citizen, Integer> {
     Citizen findByAmka(int amka);
     Citizen findById(int id);
+<<<<<<< Updated upstream:restless/src/main/java/org/regeneration/rest/restless/repository/CitizenRepository.java
     List<Citizen> findAll();
+=======
+    boolean existsByAmka(int amka);
+>>>>>>> Stashed changes:restless/src/main/java/org/regeneration/efka/repository/CitizenRepository.java
 }

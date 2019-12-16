@@ -5,7 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Objects;
 
+<<<<<<< Updated upstream:restless/src/main/java/org/regeneration/rest/restless/entity/User.java
 @Entity
+=======
+
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+>>>>>>> Stashed changes:restless/src/main/java/org/regeneration/efka/entity/User.java
 public class User {
 
     @Id

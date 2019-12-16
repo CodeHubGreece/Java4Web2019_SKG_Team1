@@ -1,11 +1,6 @@
-package org.regeneration.rest.restless;
+package org.regeneration.efka;
 
-import org.regeneration.rest.restless.entity.User;
-import org.regeneration.rest.restless.repository.UserRepository;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class LoadData {

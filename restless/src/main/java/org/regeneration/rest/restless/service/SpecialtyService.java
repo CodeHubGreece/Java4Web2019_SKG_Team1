@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class SpecialtyService {
 
+
     private final SpecialtyRepository specialtyRepository;
 
     @Autowired

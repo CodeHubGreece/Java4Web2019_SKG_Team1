@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 public class SpecialtyController {
 
+
     private final SpecialtyService specialtyService;
 
     @Autowired

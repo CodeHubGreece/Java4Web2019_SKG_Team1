@@ -1,4 +1,13 @@
+<<<<<<< Updated upstream:restless/src/main/java/org/regeneration/rest/restless/entity/Doctor.java
 package org.regeneration.rest.restless.entity;
+=======
+package org.regeneration.efka.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+>>>>>>> Stashed changes:restless/src/main/java/org/regeneration/efka/entity/Doctor.java
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -6,6 +15,7 @@ import java.util.Objects;
 
 @Entity
 public class Doctor {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +33,7 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private Collection<Appointment> appointments;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id",referencedColumnName = "id", nullable = false)
     private User user;

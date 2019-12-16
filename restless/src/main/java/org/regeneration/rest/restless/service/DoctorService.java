@@ -1,8 +1,13 @@
 package org.regeneration.rest.restless.service;
 
 
+<<<<<<< Updated upstream:restless/src/main/java/org/regeneration/rest/restless/service/DoctorService.java
 import org.regeneration.rest.restless.entity.Doctor;
 import org.regeneration.rest.restless.repository.DoctorRepository;
+=======
+import org.regeneration.efka.repository.DoctorRepository;
+import org.regeneration.efka.entity.Doctor;
+>>>>>>> Stashed changes:restless/src/main/java/org/regeneration/efka/service/DoctorService.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
