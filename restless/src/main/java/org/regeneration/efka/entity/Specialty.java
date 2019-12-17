@@ -1,5 +1,6 @@
 package org.regeneration.efka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,13 +23,14 @@ public class Specialty {
     @Column(name = "specialty", nullable = false, length = 50)
     private String specialty;
 
-    @OneToMany(mappedBy = "specialty")
+    /*@OneToMany(mappedBy = "specialty", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Collection<Doctor> doctors;
 
     public Specialty(String specialty) {
         this.specialty = specialty;
         doctors = new ArrayList<>();
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {

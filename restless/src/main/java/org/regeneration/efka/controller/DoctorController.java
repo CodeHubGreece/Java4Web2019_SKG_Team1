@@ -19,12 +19,7 @@ public class DoctorController {
     }
 
     @GetMapping("/doctors")
-    public List<Doctor> findAll() {
-        return doctorService.findAll();
-    }
-
-    @GetMapping("/doctor")
-    public List<Doctor> findAllBySpecialityId(@RequestParam(name = "specialtyId") int specialtyId) {
+    public List<Doctor> findAllBySpecialityId(@RequestParam(name = "specialtyId") Integer specialtyId) {
         return doctorService.findAllBySpecialityId(specialtyId);
     }
 }

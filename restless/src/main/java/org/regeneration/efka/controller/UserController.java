@@ -18,16 +18,16 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> findAll(@RequestBody User user){
+    public List<User> findAll(){
         return userService.findAll();
     }
 
-    @GetMapping("/user")
-    public User findByUsername(Principal loggedInUser){
-        return userService.findByUsername(loggedInUser.getName());
+    @PostMapping("/users")
+    public User findByUsername(@RequestParam String username,Principal loggedInUser){
+        return userService.findByUsername(username);
     }
 
-    @GetMapping("/user/checkUsername")
+    @PostMapping("/users/checkUsername")
     public boolean checkUsername(@RequestParam String username){
         return userService.checkUsername(username);
     }

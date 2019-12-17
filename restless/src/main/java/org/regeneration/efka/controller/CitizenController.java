@@ -24,9 +24,15 @@ public class CitizenController {
         return citizenService.findAll();
     }
 
-    @PostMapping("/citizen/register")
+    @PostMapping("/citizens/register")
     public Citizen registerCitizen(@RequestBody RegistrationData registrationData) {
         return citizenService.register(registrationData);
+    }
+
+    @PostMapping("/users/checkAmka")
+    public boolean checkAmka(@RequestParam String amkaString){
+        Long amka = Long.valueOf(amkaString);
+        return citizenService.checkAmka(amka);
     }
 
 }

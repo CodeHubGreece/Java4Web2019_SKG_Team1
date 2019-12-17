@@ -14,19 +14,19 @@ public class DoctorService {
     private final DoctorRepository doctorRepository;
 
     @Autowired
-    public DoctorService(DoctorRepository doctorRepository){
+    public DoctorService(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
 
-    public Doctor findById(int id){
+    public Doctor findById(int id) {
         return doctorRepository.findById(id);
     }
 
-    public List<Doctor> findAllBySpecialityId(int specialtyId){
-        return doctorRepository.findAllBySpecialityId(specialtyId);
-    }
-
-    public List<Doctor> findAll() {
-        return doctorRepository.findAll();
+    public List<Doctor> findAllBySpecialityId(Integer specialtyId) {
+        if (specialtyId != null) {
+            return doctorRepository.findAllBySpecialityId(specialtyId);
+        } else {
+            return doctorRepository.findAll();
+        }
     }
 }

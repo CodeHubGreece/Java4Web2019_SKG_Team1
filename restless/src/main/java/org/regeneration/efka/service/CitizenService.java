@@ -41,6 +41,10 @@ public class CitizenService {
         return citizenRepository.findAll();
     }
 
+    public boolean checkAmka(Long amka) {
+        return citizenRepository.existsByAmka(amka);
+    }
+
     public Citizen register(RegistrationData registrationData) throws InputMismatchException {
 
         if (!userRepository.existsByUsername(registrationData.getUsername())

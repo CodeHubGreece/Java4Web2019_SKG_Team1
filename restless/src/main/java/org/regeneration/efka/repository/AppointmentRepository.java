@@ -5,8 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -16,11 +14,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     List<Appointment> findAllByDoctorId(int doctorId);
 
-    List<Appointment> findAllByDatetimeBetweenAndDoctorId(Timestamp fromDate, Timestamp toDate, int doctorId);
+    List<Appointment> findAllByDatetimeBetweenAndDoctorId(Date fromDate, Date toDate, int doctorId);
 
-    List<Appointment> findAllByDatetimeBetweenAndDescription(Timestamp fromDate, Timestamp toDate, String description);
+    List<Appointment> findAllByDoctorIdAndDatetimeBetweenAndDescriptionContainsOrderByDatetimeAsc(int doctorId, Date fromDate, Date toDate, String description);
 
     Appointment findById(int id);
+
+    void deleteById(int id);
 
     boolean existsByCitizenIdAndDatetime(int citizenId, Date datetime);
     boolean existsByDoctorIdAndDatetime(int doctorId, Date datetime);

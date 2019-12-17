@@ -38,12 +38,10 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "citizen_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Citizen citizen;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Doctor doctor;
 
 

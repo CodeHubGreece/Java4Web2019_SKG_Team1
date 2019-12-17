@@ -32,4 +32,5 @@ public class UserService {
     public boolean checkUsername(String username) {
         return userRepository.existsByUsername(username);
     }
+
 }

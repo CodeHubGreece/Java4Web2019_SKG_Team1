@@ -1,6 +1,7 @@
 package org.regeneration.efka.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,11 +40,13 @@ public class Citizen {
     @Column(name = "phone_number", length = 11)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "citizen")
+    @OneToMany(mappedBy = "citizen", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Collection<Appointment> appointments;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private User user;
 
     public Citizen(Long amka, String firstName, String lastName, String email, String phoneNumber) {
