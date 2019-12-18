@@ -24,8 +24,8 @@ $('#email').on('blur', function(){
 //AMKA VALIDATION
 $('#amka').on('blur', function(){
 	var amka = $('#amka').val();
-	if(amka.toString().length != 10) {
-        changeDOM("amka", "amka must be 10 numbers", lightishRed, false);
+	if(amka.toString().length != 11) {
+        changeDOM("amka", "amka must be 11 numbers", lightishRed, false);
         return;
     }
 
@@ -37,6 +37,11 @@ $('#amka').on('blur', function(){
         success: function(response){
             if (response ==  true)changeDOM("amka","AMKA is taken",lightishRed,false);
             else if (response == false) changeDOM("amka","",lightishGreen,true);
+        },
+        statusCode: {
+            400: function(){
+                changeDOM("amka", "Wrong AMKA", lightishRed, false);
+            }
         }
     });
 	
@@ -44,7 +49,6 @@ $('#amka').on('blur', function(){
 
 
 //USERNAME VALIDATION
-
  $('#username').on('blur', function(){
   var username = $('#username').val();
   if (username == '') {
@@ -56,8 +60,8 @@ $('#amka').on('blur', function(){
     type: 'post',
     data: {  'username' : username, },
     success: function(response){
-      if (response == 'taken' )changeDOM("username","Username is taken",lightishRed,false);
-      else if (response == 'not taken') changeDOM("username","",lightishGreen,true);
+      if (response == true )changeDOM("username","Username is taken",lightishRed,false);
+      else if (response == false) changeDOM("username","",lightishGreen,true);
     }
   });
  });
@@ -95,7 +99,7 @@ $('#amka').on('blur', function(){
     //PHONENUMBER
     $('#number').on('blur', function() {
         var number = $('#number').val();
-        if (number.toString().length < 10) {
+        if (number.toString().length < 5) {
             changeDOM("number"," Phone number is too small",lightishRed,false);
         }
         else  changeDOM("number","",lightishGreen,true);

@@ -12,7 +12,7 @@ function register(){
     let amka = document.getElementById('amka').value;
     let number = document.getElementById('number').value;
                $.ajax({
-                        url: ROOT_PATH + '/citizen/register',
+                        url: ROOT_PATH + '/citizens/register',
                         type: 'POST',
                          dataType: 'json',
                          data: JSON.stringify({
@@ -27,7 +27,7 @@ function register(){
                     contentType: 'application/json',
                     success: function (result) {
                         //alert("Data Saved ");
-                        window.location.replace("new.html")
+                        window.location.replace("/citizens/dashboard.html")
                     },
                     error: function (xhr, resp, text) {
                         alert("NOT Saved: " + text);

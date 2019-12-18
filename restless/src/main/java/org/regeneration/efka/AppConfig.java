@@ -80,8 +80,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(new SimpleUrlAuthenticationFailureHandler())
                 .and()
                 .logout()
-                .permitAll()
-                .logoutSuccessUrl("/login.html");
+                .logoutUrl("/logout");
     }
 
 

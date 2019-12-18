@@ -100,9 +100,15 @@ public class AppointmentService {
         if (!oldAppointment.getDatetime().before(currentTime)) {
             if (!appointmentRepository.existsByCitizenIdAndDatetime(oldAppointment.getCitizenId(), updatedAppointmentData.getDatetime())
                     && !appointmentRepository.existsByDoctorIdAndDatetime(oldAppointment.getDoctorId(), updatedAppointmentData.getDatetime())) {
-                oldAppointment.setDatetime(updatedAppointmentData.getDatetime());
-                oldAppointment.setDescription(updatedAppointmentData.getDescription());
-                oldAppointment.setNotes(updatedAppointmentData.getNotes());
+                if (updatedAppointmentData.getDatetime() != null){
+                    oldAppointment.setDatetime(updatedAppointmentData.getDatetime());
+                }
+                if (updatedAppointmentData.getDescription() != null){
+                    oldAppointment.setDescription(updatedAppointmentData.getDescription());
+                }
+                if (updatedAppointmentData.getNotes() != null) {
+                    oldAppointment.setNotes(updatedAppointmentData.getNotes());
+                }
                 return appointmentRepository.save(oldAppointment);
             } else {
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Appointment overlaps");

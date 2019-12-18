@@ -21,7 +21,7 @@ public class ApiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 
     private final HttpSessionRequestCache requestCache;
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+//    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     public ApiAuthenticationSuccessHandler() {
         this.requestCache = new HttpSessionRequestCache();
@@ -45,7 +45,7 @@ public class ApiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 
         clearAuthenticationAttributes(request);
     }
-
+/*
     protected void handle(HttpServletRequest request,
                           HttpServletResponse response, Authentication authentication)
             throws IOException {
@@ -83,6 +83,6 @@ public class ApiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
         } else {
             throw new IllegalStateException();
         }
-    }
+    }*/
 
 }
