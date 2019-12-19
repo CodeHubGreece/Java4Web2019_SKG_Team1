@@ -1,24 +1,17 @@
 
 
 //FETCH SPECIALTIES
-$('document').ready(function(){
+$('document').ready(function () {
     $.ajax({
-        url:  ROOT_PATH + '/specialties',
+        url: ROOT_PATH + '/specialties',
         type: 'get',
         dataType: 'json',
         contentType: 'application/json',
-        success: function(response){
+        success: function (response) {
             console.log(response[0].specialty);
             showSpecialty(response);
-              }
+        }
     });
-
-
-
-    $('#appointmentDate').datetimepicker({
-        minDate: moment().add(2)
-    });
-
 });
 
 
@@ -27,9 +20,9 @@ $('document').ready(function(){
 
 //SHOW SPECIALTIES
 function showSpecialty(specialties) {
-    var options = $("#speciltyDropdown");
+    var options = $("#specialtyDropdown");
     //don't forget error handling!
-    $.each(specialties, function(index,item) {
+    $.each(specialties, function (index, item) {
         console.log(item);
         options.append($("<option />").val(item.id).text(item.specialty));
     });
@@ -37,18 +30,18 @@ function showSpecialty(specialties) {
 
 
 //FETCH DOCTORS
-function fetchDoctors(){
-    console.log("changed specalty");
-    var specialtyId =$ ( "#speciltyDropdown option:selected" ).val();
-    if(specialtyId !== "default") {
+function fetchDoctors() {
+    console.log("changed specialty");
+    var specialtyId = $("#specialtyDropdown option:selected").val();
+    if (specialtyId !== "default") {
         console.log(specialtyId);
 
         $.ajax({
-            url: ROOT_PATH + '/doctor',
-            type: 'get',
-            data: {'specialtyId': specialtyId},
-            dataType: 'json',
-            contentType: 'application/json',
+            url: ROOT_PATH + '/appointments/doctors',
+            type: 'post',
+            data: { 'specialtyId': specialtyId },
+            // dataType: 'json',
+            // contentType: 'application/json',
             success: function (response) {
                 console.log(response);
                 showDocs(response);
@@ -60,9 +53,9 @@ function fetchDoctors(){
 
 //SHOW DOCTORS
 
-function showDocs(doctors){
-    if( !$('#doctorDropdown').length ){
-       console.log("docs dont exists");
+function showDocs(doctors) {
+    if (!$('#doctorDropdown').length) {
+        console.log("docs dont exists");
         $('#docDiv').append('<select class="selection-2" id="doctorDropdown"><option>Select doctors</option></select>');
     }
     else console.log("docs exist");
@@ -70,8 +63,8 @@ function showDocs(doctors){
     var options = $("#doctorDropdown");
     $('#doctorDropdown').empty();
     $('#doctorDropdown').append($("<option />").text("Select Doctor"));
-  //  $('#doctorDropdown').append('<select id="doctorDropdown"><option>Select doctors</option></select>');
-    $.each(doctors, function(index,item) {
+    //  $('#doctorDropdown').append('<select id="doctorDropdown"><option>Select doctors</option></select>');
+    $.each(doctors, function (index, item) {
         var docName = item.firstName + " " + item.lastName;
         options.append($("<option />").val(item.id).text(docName));
     });
@@ -81,14 +74,12 @@ function showDocs(doctors){
 }
 
 //CREATE APPOINTMENT
-$('#storeAppointments').click(function(){
+$('#storeAppointments').click(function () {
     console.log("hi");
-    var date = $('#appointmentDate').val();
-    var time = $('#appointmentTime').val();
-    var jsonDateTime =new Date((date + ' ' + time));
+    var datetimeField = $('#appointmentDateTime').val();
+    var jsonDateTime = datetimeField + ":00";
 
     var docId = $('#doctorDropdown').val();
-    var citId = 5;
     var description = document.getElementById("description").value;
     var notes = document.getElementById("notes").value;
 
@@ -102,19 +93,19 @@ $('#storeAppointments').click(function(){
 
     //create appointment
     $.ajax({
-        url: ROOT_PATH + '/appointment/new',
+        url: ROOT_PATH + '/appointments/new',
         type: 'post',
         data: JSON.stringify({
-            'citizenId': citId,
-            'doctorId':docId,
+            'doctorId': docId,
             'datetime': jsonDateTime,
-            'description':description,
-            'notes':notes
+            'description': description,
+            'notes': notes
         }),
         dataType: 'json',
         contentType: 'application/json',
         success: function (response) {
             console.log(response);
+            window.location.replace(ROOT_PATH + "/citizens/dashboard.html");
         }
     });
 });

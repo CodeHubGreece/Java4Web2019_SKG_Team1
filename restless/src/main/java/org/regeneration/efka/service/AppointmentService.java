@@ -98,9 +98,8 @@ public class AppointmentService {
 
         Appointment oldAppointment = appointmentRepository.findById(updatedAppointmentData.getId());
         if (!oldAppointment.getDatetime().before(currentTime)) {
-            if (!appointmentRepository.existsByCitizenIdAndDatetime(oldAppointment.getCitizenId(), updatedAppointmentData.getDatetime())
-                    && !appointmentRepository.existsByDoctorIdAndDatetime(oldAppointment.getDoctorId(), updatedAppointmentData.getDatetime())) {
-                if (updatedAppointmentData.getDatetime() != null){
+            if (!appointmentRepository.existsByDoctorIdAndDatetime(oldAppointment.getDoctorId(), updatedAppointmentData.getDatetime())) {
+                if (updatedAppointmentData.getDatetime() != null && !oldAppointment.getDatetime().equals(updatedAppointmentData.getDatetime())){
                     oldAppointment.setDatetime(updatedAppointmentData.getDatetime());
                 }
                 if (updatedAppointmentData.getDescription() != null){
@@ -111,7 +110,7 @@ public class AppointmentService {
                 }
                 return appointmentRepository.save(oldAppointment);
             } else {
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Appointment overlaps");
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Doctor is busy");
             }
         } else {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Appointment has already taken place");

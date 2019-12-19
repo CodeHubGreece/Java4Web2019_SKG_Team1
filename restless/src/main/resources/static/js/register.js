@@ -25,9 +25,8 @@ function register(){
                          amka:amka
                     }),
                     contentType: 'application/json',
-                    success: function (result) {
-                        //alert("Data Saved ");
-                        window.location.replace("/citizens/dashboard.html")
+                    success: function (citizen) {
+                        login(document.getElementById('username'), document.getElementById('password'));
                     },
                     error: function (xhr, resp, text) {
                         alert("NOT Saved: " + text);

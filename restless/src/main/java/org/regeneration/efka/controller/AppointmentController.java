@@ -6,6 +6,7 @@ import org.regeneration.efka.entity.Appointment;
 import org.regeneration.efka.service.AppointmentService;
 import org.regeneration.efka.service.CitizenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
