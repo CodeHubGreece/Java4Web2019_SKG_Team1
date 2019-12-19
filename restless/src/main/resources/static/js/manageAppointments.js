@@ -1,4 +1,4 @@
-let megaAppointments = [];
+var megaAppointments = [];
 
 
 $(document).ready(function () {
@@ -32,7 +32,7 @@ $('#getApointments,.close').click(function () {
     var fromDate = $('#fromdate').val();
     var toDate = $('#todate').val();
     fromDate = fromDate + " 00:00:00";
-    toDate = toDate + " 00:00:00";
+    toDate = toDate + " 23:59:59";
     var specialtyId = $("#specialtyDropdown option:selected").val();
 
     //get appointments
@@ -68,7 +68,7 @@ $('#getApointments,.close').click(function () {
 function showAppointments() {
     $('#appointmentTables').empty();
 
-    let content = '<table id="appTable" class="table table-striped" style="word-break: break-all;">';
+    let content = '<table id="appTable" class="table table-striped" style="word-break: break-word;">';
     content += '<thead class = "thead-light"><tr>' +
         '<th scope="col">#</th>' +
         '<th scope="col">Doctor</th>' +
@@ -82,11 +82,10 @@ function showAppointments() {
 
     var rowcount = 1;
     var dateoptions = { year: 'numeric', month: 'short', day: '2-digit' };
-    var timeoptions = { hour: '2-digit', minute: '2-digit' };
     megaAppointments.forEach(element => {
         let dateTime = new Date(element.datetime);// get datetime
         let date = dateTime.toLocaleDateString(navigator.language, dateoptions);//get date
-        let time = dateTime.toLocaleTimeString(navigator.language, timeoptions);//get  time and remove seconds
+        let time = dateTime.toISOString().slice(11,16);//get  time and remove seconds
 
         content += '<tr>' +
             '<th scope="row">' + rowcount + '</th>' +
@@ -116,17 +115,14 @@ function showAppointments() {
 function updateAppointment(index) {
 
     console.log(index);
-    var dateoptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    var timeoptions = { hour: '2-digit', minute: '2-digit' };
     let dateTime = new Date(megaAppointments[index].datetime);// get datetime
     console.log(dateTime);
+    dateTimeString = dateTime.toISOString().slice(0,10) + " " + dateTime.toISOString().slice(11,16);
     // dateTime.setHours(dateTime.getHours() + 24);//this 24 is so fucking dumb
-    let date = dateTime.toLocaleDateString(navigator.language, dateoptions);//get date
-    let time = dateTime.toLocaleTimeString(navigator.language, timeoptions);//get  time and remove seconds
 
 
-    $("#dateUpdate").val(date);
-    $('#timeUpdate').val(time);
+
+    $("#appointmentDateTime").val(dateTimeString);
     $('#descriptionUpdate').val(megaAppointments[index].description);
     $('#observationUpdate').val(megaAppointments[index].notes);
     $('#hiddenAppointentID').val(index);
@@ -137,9 +133,8 @@ function updateAppointment(index) {
 
 function saveChanges() {
     let index = $('#hiddenAppointentID').val();
-    let newTime = $('#timeUpdate').val();
-    let newDate = $('#dateUpdate').val();
-    let jsonDateTime = newDate + " " + newTime + ":00";
+    let newDateTime = $('#appointmentDateTime').val();
+    let jsonDateTime = newDateTime + ":00";
 
     let newDescription = $('#descriptionUpdate').val();
     let newNotes = $('#observationUpdate').val();
@@ -165,8 +160,9 @@ function saveChanges() {
             $('#updateSuccess').html("Appointment updated successfully");
 
         },
-        error: function (xhr, resp, text) {
-            alert("NOT Saved: " + text);
+        error: function (response) {
+            responseJson=JSON.stringify(response);
+            alert("NOT Saved: " + responseJson.message);
         }
     });
 }
@@ -182,8 +178,9 @@ function deleteAppointment() {
             $('#updateSuccess').html("Appointment deleted successfully");
 
         },
-        error: function (xhr, resp, text) {
-            alert("NOT Saved: " + text);
+        error: function (response) {
+            responseJson=JSON.stringify(response);
+            alert("NOT Saved: " + responseJson.message);
         }
     });
 }

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
-
 	<title>Search Form</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,16 +11,11 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/util.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 <!--===============================================================================================-->
 <script src="../js/roothapth.js"></script>
-<!-- <script src="../js/checkauth.js"></script> -->
+<script src="../js/checkauth.js"></script>
 <script src="../vendor/jquery/jquery-3.4.1.min.js"></script>
 <script src="../vendor/moment/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
@@ -32,7 +25,7 @@
 <body>
 
 	<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark mb-0">
-		<a class="navbar-brand" href="#">ΕΦΚΑ//:</a>
+		<a class="navbar-brand" href="dashboard.html">ΕΦΚΑ//:</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
 		</button>
@@ -76,7 +69,7 @@
 						<div class='col-md'>
 							<div class="form-group">
 							   <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-									<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7" id="fromdate"/>
+									<input placeholder="From" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7" id="fromdate"/>
 									<div class="input-group-append input-group-addon" data-target="#datetimepicker7" data-toggle="datetimepicker">
 										<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 									</div>
@@ -86,7 +79,7 @@
 						<div class='col-md'>
 							<div class="form-group">
 							   <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
-									<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8" id="todate"/>
+									<input placeholder="To" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8" id="todate"/>
 									<div class="input-group-append input-group-addon" data-target="#datetimepicker8" data-toggle="datetimepicker">
 										<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 									</div>
@@ -137,7 +130,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Update Appointment</h5>
+				<h5 class="modal-title">Edit Appointment</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -145,8 +138,24 @@
 			<div class="modal-body">
 
 				<div class="wrap-input100 validate-input" data-validate = "Date">
-					Date: <input id="dateUpdate" type="date" name="date" required>
-					<input id="timeUpdate" type="time" name="time">
+					Date: 
+					<div class="col-100">
+					
+						<div class="input-group" id="datetimepicker" data-target-input="nearest">
+							<input type="text" class="form-control datetimepicker-input" id="appointmentDateTime" data-target="#datetimepicker"/>
+								<div class="input-group-append input-group-addon" data-target="#datetimepicker" data-toggle="datetimepicker">
+									<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+								</div>
+						</div>
+						<script type="text/javascript">
+							$(function () {
+								$('#datetimepicker').datetimepicker({
+									daysOfWeekDisabled: [0, 6],
+									format: 'YYYY-MM-DD HH:mm'
+								});
+							});
+						</script>
+					</div>
 				</div>
 
 
