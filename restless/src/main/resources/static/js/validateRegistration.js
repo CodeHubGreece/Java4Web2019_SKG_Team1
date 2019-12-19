@@ -97,7 +97,7 @@ $('#amka').on('blur', function(){
     });
 
     //PHONENUMBER
-    $('#number').on('blur', function() {
+    $('#number').on('change', function() {
         var number = $('#number').val();
         if (number.toString().length < 5) {
             changeDOM("number"," Phone number is too small",lightishRed,false);

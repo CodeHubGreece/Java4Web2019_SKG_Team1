@@ -7,22 +7,22 @@
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('../fonts/ubuntu/Ubuntu-R.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('../fonts/ubuntu/Ubuntu-B.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('../fonts/ubuntu/Ubuntu-M.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+  src: url('../fonts/ubuntu/Ubuntu-B.ttf'); 
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -188,14 +188,15 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 77px 130px 1px 95px; /*-- akjfnsjk*/
+  padding: 50px 100px 50px 100px; 
 }
 
 /*------------------------------------------------------------------
 [  ]*/
 .login100-pic {
   width: 316px;
-  margin-top: 120px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .login100-pic img {
@@ -207,8 +208,6 @@ iframe {
 [  ]*/
 .login100-form {
   width: 290px;
-  height: 640px;  /*-- akjfnsjk*/
-
 }
 
 .login100-form-title {
@@ -234,7 +233,7 @@ iframe {
 
 .input100 {
   font-family: Poppins-Medium;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.5;
   color: #666666;
 
@@ -282,7 +281,7 @@ iframe {
 }
 
 .symbol-input100 {
-  font-size: 15px;
+  font-size: 17px;
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -327,7 +326,7 @@ iframe {
 
 .login100-form-btn {
   font-family: Montserrat-Bold;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.5;
   color: #fff;
   text-transform: uppercase;
@@ -442,7 +441,7 @@ iframe {
   display: block;
   position: absolute;
   color: #c80000;
-  font-size: 15px;
+  font-size: 17px;
   top: 50%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);

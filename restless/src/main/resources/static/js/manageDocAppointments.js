@@ -23,6 +23,9 @@ $('#getApointments,.close').click(function () {
             console.log(response);
             megaAppointments = response;
             showAppointments()
+        },
+        error: function (response){
+            console.log(response);
         }
     });
 });
