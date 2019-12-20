@@ -23,5 +23,10 @@ public class DoctorController {
     public List<Doctor> findAllBySpecialityId(@RequestParam(name = "specialtyId") Integer specialtyId) {
         return doctorService.findAllBySpecialityId(specialtyId);
     }
+
+    @PostMapping("/doctors")
+    public Doctor findById(@RequestParam(name = "id") Integer id) {
+        return doctorService.findById(id);
+    }
 }
 

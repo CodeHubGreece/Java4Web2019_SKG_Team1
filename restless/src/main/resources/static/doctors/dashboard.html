@@ -32,7 +32,20 @@
             <a class="nav-link btn ml-1 text-light" href="manage.html">Manage Appointments</a>
 		  </li>
         </ul>
-      <div class="mr-2 mr-sm-2 text-light"></div>
+      <div class="mr-3 mr-sm-3 text-light text-right"><script>
+        $.ajax({
+          url: ROOT_PATH + '/doctors',
+          type: 'post',
+          data: {
+              'id': sessionStorage.getItem(LOCAL_STORAGE_LOGIN_TOKEN_ID)
+          },
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function (response) {
+
+          }
+      });
+      </script></div>
           <button class="btn btn-outline-danger my-2 my-sm-2" type="button" onclick="logout()">Log Out</button>
       </div>
     </nav>
