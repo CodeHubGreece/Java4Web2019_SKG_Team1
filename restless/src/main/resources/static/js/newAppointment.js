@@ -10,6 +10,13 @@ $('document').ready(function () {
         success: function (response) {
             console.log(response[0].specialty);
             showSpecialty(response);
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Connection failed!',
+                text: 'Could not fetch specialties',
+            });
         }
     });
 });
@@ -43,8 +50,14 @@ function fetchDoctors() {
             // dataType: 'json',
             // contentType: 'application/json',
             success: function (response) {
-                console.log(response);
                 showDocs(response);
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection failed!',
+                    text: 'Could not fetch doctors',
+                });
             }
         });
     }
@@ -68,9 +81,6 @@ function showDocs(doctors) {
         var docName = item.firstName + " " + item.lastName;
         options.append($("<option />").val(item.id).text(docName));
     });
-
-
-
 }
 
 //CREATE APPOINTMENT
@@ -104,8 +114,16 @@ $('#storeAppointments').click(function () {
         dataType: 'json',
         contentType: 'application/json',
         success: function (response) {
-            console.log(response);
-            window.location.replace(ROOT_PATH + "/citizens/dashboard.html");
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Appointment was created successfully!',
+            }).then((result) => {
+                if (result.value) {
+                    window.location.replace(ROOT_PATH + "/citizens/dashboard.html");
+                }
+            })
+            
         }
     });
 });

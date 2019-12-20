@@ -25,7 +25,11 @@ $('#getApointments,.close').click(function () {
             showAppointments()
         },
         error: function (response){
-            console.log(response);
+            Swal.fire({
+                icon: 'error',
+                title: 'Search failed!',
+                text: 'Could not fetch appointments',
+            });
         }
     });
 });

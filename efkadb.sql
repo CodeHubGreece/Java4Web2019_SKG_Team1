@@ -34,7 +34,7 @@ CREATE TABLE `appointment` (
   KEY `doc_app_idx` (`doctor_id`),
   CONSTRAINT `cit_app` FOREIGN KEY (`citizen_id`) REFERENCES `citizen` (`id`),
   CONSTRAINT `doc_app` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-19 19:29:43
+-- Dump completed on 2019-12-20 17:15:54

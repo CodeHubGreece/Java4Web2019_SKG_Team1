@@ -157,12 +157,22 @@ function saveChanges() {
         }),
         contentType: 'application/json',
         success: function (result) {
-            $('#updateSuccess').html("Appointment updated successfully");
-
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Appointment was updated successfully!',
+            }).then((result) => {
+                if (result.value) {
+                    $('#myModal').modal('hide');
+                }
+            })
         },
         error: function (response) {
-            responseJson=JSON.stringify(response);
-            alert("NOT Saved: " + responseJson.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Update failed!',
+                text: 'Could not update appointment',
+            });
         }
     });
 }
@@ -175,12 +185,22 @@ function deleteAppointment() {
         url: ROOT_PATH + '/appointments/' + appId,
         type: 'DELETE',
         success: function (result) {
-            $('#updateSuccess').html("Appointment deleted successfully");
-
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Appointment deleted successfully!',
+            }).then((result) => {
+                if (result.value) {
+                    $('#myModal').modal('hide');
+                }
+            })
         },
         error: function (response) {
-            responseJson=JSON.stringify(response);
-            alert("NOT Saved: " + responseJson.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Delete failed!',
+                text: 'Could not delete appointment',
+            });
         }
     });
 }

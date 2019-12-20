@@ -34,7 +34,11 @@ function login(usernameElement, passwordElement) {
         },
         statusCode: {
             401: function () {
-                alert("Invalid username or password!");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login failed!',
+                    text: 'Invalid username or password',
+                });
             }
         }
     });
