@@ -19,7 +19,8 @@ public class DoctorService {
     }
 
     public Doctor findById(int id) {
-        return doctorRepository.findById(id);
+        Doctor doc =doctorRepository.findByUserId(id);
+        return doc;
     }
 
     public List<Doctor> findAllBySpecialityId(Integer specialtyId) {

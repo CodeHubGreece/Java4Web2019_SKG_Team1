@@ -31,6 +31,11 @@ public class CitizenController {
         return citizenService.register(registrationData);
     }
 
+    @PostMapping("/citizens")
+    public Citizen findByUserId(@RequestParam Integer id) {
+        return citizenService.findByUserId(id);
+    }
+
     @PostMapping("/users/checkAmka")
     public boolean checkAmka(@RequestParam String amka) {
         Long amkaLong;

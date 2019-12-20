@@ -42,6 +42,7 @@
 			  <a class="nav-link btn ml-1 text-light" href="manage.html">Manage Appointments</a>
 			</li>
 		  </ul>
+		  <div class="mr-3 mr-sm-3 text-light text-right" id="userbox"></div>
 			<button class="btn btn-outline-danger my-2 my-sm-2" type="button" onclick="logout()">Log Out</button>
 		</div>
 	  </nav>
@@ -127,6 +128,23 @@
 <script src="../vendor/sweetalert/sweetalert2.all.min.js"></script>
 <script src="../js/newAppointment.js"></script>
 <script src="../js/logout.js"></script>
+<script>
+	$.ajax({
+        url: ROOT_PATH + '/citizens',
+        type: 'post',
+        data: {
+            'username': sessionStorage.getItem(LOCAL_STORAGE_LOGIN_TOKEN_ID),
+        },
+        success: function (response) {
+          console.log(response);
+          let userbox = document.getElementById("userbox");
+          if(userbox){
+            console.log(response);
+            userbox.innerHTML = response.firstName + " " + response.lastName;
+          }
+        }
+    });
+  </script>
 
 </body>
 </html>

@@ -7,12 +7,12 @@
     <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
 	<!--===============================================================================================-->
-		<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="../css/util.css">
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<!--===============================================================================================-->
-	<script src="../js/roothapth.js"></script>
+  <script src="../js/roothapth.js"></script>
 	<!-- <script src="../js/checkauth.js"></script> -->
   </head>
 
@@ -32,20 +32,7 @@
             <a class="nav-link btn ml-1 text-light" href="manage.html">Manage Appointments</a>
 		  </li>
         </ul>
-      <div class="mr-3 mr-sm-3 text-light text-right"><script>
-        $.ajax({
-          url: ROOT_PATH + '/doctors',
-          type: 'post',
-          data: {
-              'id': sessionStorage.getItem(LOCAL_STORAGE_LOGIN_TOKEN_ID)
-          },
-          dataType: 'json',
-          contentType: 'application/json',
-          success: function (response) {
-
-          }
-      });
-      </script></div>
+      <div class="mr-3 mr-sm-3 text-light text-right" id="userbox"></div>
           <button class="btn btn-outline-danger my-2 my-sm-2" type="button" onclick="logout()">Log Out</button>
       </div>
     </nav>
@@ -72,6 +59,24 @@
     <script src="../vendor/bootstrap/js/popper.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/logout.js"></script>
+
+    <script>
+      $.ajax({
+        url: ROOT_PATH + '/doctors',
+        type: 'post',
+        data: {
+            'id': sessionStorage.getItem(LOCAL_STORAGE_LOGIN_TOKEN_ID),
+        },
+        success: function (response) {
+          console.log(response);
+          let userbox = document.getElementById("userbox");
+          if(userbox){
+            console.log(response);
+            userbox.innerHTML = response.firstName + " " + response.lastName + "<br>" + response.specialty.specialty;
+          }
+        }
+    });
+    </script>
 
   </body>
 </html>

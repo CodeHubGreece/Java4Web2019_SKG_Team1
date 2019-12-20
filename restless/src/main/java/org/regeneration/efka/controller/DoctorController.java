@@ -25,7 +25,7 @@ public class DoctorController {
     }
 
     @PostMapping("/doctors")
-    public Doctor findById(@RequestParam(name = "id") Integer id) {
+    public Doctor findById(@RequestParam Integer id) {
         return doctorService.findById(id);
     }
 }

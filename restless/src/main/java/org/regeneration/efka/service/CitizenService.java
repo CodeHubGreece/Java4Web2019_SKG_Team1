@@ -33,6 +33,8 @@ public class CitizenService {
         return citizenRepository.findById(id);
     }
 
+    public Citizen findByUserId(int id) {return citizenRepository.findByUserId(id);}
+
     public Citizen findByAmka(Long amka) {
         return citizenRepository.findByAmka(amka);
     }

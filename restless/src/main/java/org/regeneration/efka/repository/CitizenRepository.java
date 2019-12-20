@@ -12,5 +12,6 @@ import java.util.List;
 public interface CitizenRepository extends JpaRepository<Citizen, Integer> {
     Citizen findByAmka(Long amka);
     Citizen findById(int id);
+    Citizen findByUserId(int id);
     boolean existsByAmka(Long amka);
 }
